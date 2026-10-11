@@ -7,6 +7,24 @@ public HTTP(S) target through `Fetch-Relay-Target`.
 
 ## Deploy
 
+### Render
+
+This folder includes a Node.js adapter for Render; Render cannot run the
+Cloudflare Worker entry point directly.
+
+1. In Render, create a **Web Service** connected to this repository.
+2. Set **Root Directory** to `examples/fetch-relay-worker`.
+3. Set **Build Command** to `npm ci` and **Start Command** to `npm start`.
+4. Add the environment variable `RELAY_TOKEN` with a strong, private value.
+   Render provides `PORT` automatically.
+5. Deploy, then use the service's `https://<service-name>.onrender.com` URL as
+   the relay URL.
+
+The Node.js adapter blocks non-public DNS results before connecting to upstream
+hosts. Keep `RELAY_TOKEN` private and configure FreeLLMAPI as described below.
+
+### Cloudflare Workers
+
 Install Wrangler, authenticate it, set a strong secret, and deploy:
 
 ```bash

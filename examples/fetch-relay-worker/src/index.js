@@ -50,14 +50,16 @@ export default {
     }
 
     try {
-      const upstream = await fetch(target, {
+      const fetchOptions = {
         method: request.method,
         headers: sanitizeRequestHeaders(request.headers),
         body: request.method === 'GET' || request.method === 'HEAD' ? null : request.body,
         redirect: 'manual',
         cache: 'no-store',
         signal: request.signal,
-      });
+      };
+      if (request.duplex === 'half') fetchOptions.duplex = 'half';
+      const upstream = await fetch(target, fetchOptions);
       const responseHeaders = sanitizeResponseHeaders(upstream.headers);
       const location = upstream.headers.get('location');
       if (location) responseHeaders.set(REDIRECT_HEADER, location);
@@ -98,7 +100,13 @@ async function verifyBearerToken(value, expected) {
     crypto.subtle.digest('SHA-256', encoder.encode(provided)),
     crypto.subtle.digest('SHA-256', encoder.encode(expected)),
   ]);
-  return crypto.subtle.timingSafeEqual(providedHash, expectedHash);
+  const providedBytes = new Uint8Array(providedHash);
+  const expectedBytes = new Uint8Array(expectedHash);
+  let difference = 0;
+  for (let index = 0; index < providedBytes.length; index += 1) {
+    difference |= providedBytes[index] ^ expectedBytes[index];
+  }
+  return difference === 0;
 }
 
 function validateTarget(value, relayUrl) {
