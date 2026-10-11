@@ -122,12 +122,38 @@ interface NormalizedCustomModel {
   fallbackEnabled?: boolean;
 }
 
+function safeParseJson(raw: string): unknown {
+  try {
+    return JSON.parse(raw);
+  } catch {
+    const sanitized = raw.replace(/[\x00-\x1f]/g, (ch) => {
+      if (ch === '\n') return '\\n';
+      if (ch === '\r') return '';
+      if (ch === '\t') return '\\t';
+      return '';
+    });
+    return JSON.parse(sanitized);
+  }
+}
+
 function readConfigFromEnv(): { source: string; value: unknown } | null {
   const inline = process.env.FREEAPI_CONFIG_JSON?.trim();
-  if (inline) return { source: 'FREEAPI_CONFIG_JSON', value: JSON.parse(inline) };
+  if (inline) {
+    try {
+      return { source: 'FREEAPI_CONFIG_JSON', value: safeParseJson(inline) };
+    } catch (err: any) {
+      console.warn(`[config] Failed to parse FREEAPI_CONFIG_JSON (${err.message}). Skipping.`);
+    }
+  }
 
   const configPath = process.env.FREEAPI_CONFIG_PATH?.trim();
-  if (configPath) return { source: configPath, value: JSON.parse(fs.readFileSync(configPath, 'utf8')) };
+  if (configPath) {
+    try {
+      return { source: configPath, value: safeParseJson(fs.readFileSync(configPath, 'utf8')) };
+    } catch (err: any) {
+      console.warn(`[config] Failed to read/parse FREEAPI_CONFIG_PATH (${configPath}): ${err.message}. Skipping.`);
+    }
+  }
 
   return null;
 }
