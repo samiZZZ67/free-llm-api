@@ -34,7 +34,7 @@ node --version
 Then clone and start FreeLLMAPI:
 
 ```bash
-git clone https://github.com/PryxIntel/free-llm-api.git
+git clone https://github.com/samiZZZ67/free-llm-api.git
 cd freellmapi
 npm install --no-audit --no-fund
 npm run dev

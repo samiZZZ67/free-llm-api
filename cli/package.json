@@ -5,12 +5,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PryxIntel/free-llm-api.git",
+    "url": "git+https://github.com/samiZZZ67/free-llm-api.git",
     "directory": "cli"
   },
-  "homepage": "https://github.com/PryxIntel/free-llm-api/tree/main/cli#readme",
+  "homepage": "https://github.com/samiZZZ67/free-llm-api/tree/main/cli#readme",
   "bugs": {
-    "url": "https://github.com/PryxIntel/free-llm-api/issues"
+    "url": "https://github.com/samiZZZ67/free-llm-api/issues"
   },
   "keywords": [
     "freellmapi",

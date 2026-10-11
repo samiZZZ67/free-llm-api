@@ -6,11 +6,11 @@
 
 把几十家提供方的免费额度，连同任意自建的 OpenAI 兼容聊天、嵌入、图像和音频端点，一起聚合到单个 `/v1` API 之后。密钥加密存储。路由器为每个请求挑选当前可用的最佳模型，某家提供方触发限流时自动转移到下一家，并按密钥跟踪用量，让你始终待在各家的免费额度之内。
 
-[![CI](https://github.com/PryxIntel/free-llm-api/actions/workflows/ci.yml/badge.svg)](https://github.com/PryxIntel/free-llm-api/actions/workflows/ci.yml)
-[![GitHub stars](https://img.shields.io/github/stars/PryxIntel/free-llm-api?style=flat&logo=github&color=yellow)](https://github.com/PryxIntel/free-llm-api/stargazers)
+[![CI](https://github.com/samiZZZ67/free-llm-api/actions/workflows/ci.yml/badge.svg)](https://github.com/samiZZZ67/free-llm-api/actions/workflows/ci.yml)
+[![GitHub stars](https://img.shields.io/github/stars/samiZZZ67/free-llm-api?style=flat&logo=github&color=yellow)](https://github.com/samiZZZ67/free-llm-api/stargazers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#参与贡献)
-[![Docker image](https://img.shields.io/badge/ghcr.io-PryxIntel%2Ffree--llm--api-2496ED?logo=docker&logoColor=white)](https://github.com/PryxIntel/free-llm-api/pkgs/container/free-llm-api)
+[![Docker image](https://img.shields.io/badge/ghcr.io-samiZZZ67%2Ffree--llm--api-2496ED?logo=docker&logoColor=white)](https://github.com/samiZZZ67/free-llm-api/pkgs/container/free-llm-api)
 
 [English](README.md) · **简体中文**
 
@@ -163,7 +163,7 @@
 **推荐方式**（克隆并启动本地环境）：
 
 ```bash
-git clone https://github.com/PryxIntel/free-llm-api.git
+git clone https://github.com/samiZZZ67/free-llm-api.git
 cd free-llm-api
 npm install
 npm run dev
@@ -171,7 +171,7 @@ npm run dev
 
 打开 http://localhost:5173 （管理面板）与 http://localhost:3001 （网关端点），在 **密钥** 页添加你的提供方密钥，按喜好调整 **回退链** 的顺序，然后在 **密钥** 页顶部拿到你的统一 API 密钥。这个统一密钥就是你的 OpenAI SDK 要指向的东西。
 
-在 Windows 上，最省事的方式是桌面版 **[Releases 里的安装包](https://github.com/PryxIntel/free-llm-api/releases/latest)**。Android 上可参考实验性的 [Termux 指南](docs/zh-cn/install/02-android-termux.md)。
+在 Windows 上，最省事的方式是桌面版 **[Releases 里的安装包](https://github.com/samiZZZ67/free-llm-api/releases/latest)**。Android 上可参考实验性的 [Termux 指南](docs/zh-cn/install/02-android-termux.md)。
 
 其余内容，包括 Docker Compose、本地开发、声明式启动配置、生产构建、局域网访问和备份，都在 **[docs/zh-cn/install/01-install.md](docs/zh-cn/install/01-install.md)**。
 
@@ -181,7 +181,7 @@ npm run dev
 
 ![FreeLLMAPI 桌面应用](repo-assets/desktop.png)
 
-**[从 Releases 下载](https://github.com/PryxIntel/free-llm-api/releases/latest)** —— 每个版本都附带 macOS 的 `.dmg` 和 Windows 的 `.exe` 安装包。不需要注册账号或设置密码：你唯一需要的凭据就是托盘悬浮窗里的统一 API 密钥。从源码构建的步骤，以及数据存放位置，见 [docs/zh-cn/install/01-install.md#桌面应用](docs/zh-cn/install/01-install.md#桌面应用)。
+**[从 Releases 下载](https://github.com/samiZZZ67/free-llm-api/releases/latest)** —— 每个版本都附带 macOS 的 `.dmg` 和 Windows 的 `.exe` 安装包。不需要注册账号或设置密码：你唯一需要的凭据就是托盘悬浮窗里的统一 API 密钥。从源码构建的步骤，以及数据存放位置，见 [docs/zh-cn/install/01-install.md#桌面应用](docs/zh-cn/install/01-install.md#桌面应用)。
 
 macOS 要求 12 Monterey 或更高版本；Apple Silicon 请选择 **arm64**，Intel 请选择 **x64**。两种 Mac 构建都提供 ZIP 下载。
 
@@ -220,15 +220,15 @@ FreeLLMAPI 在设计上是本地优先、单用户的。你的提供方密钥留
 
 中文的术语约定见 [docs/TRANSLATION.md](docs/TRANSLATION.md)，提交翻译前请先过一遍，这样 README 和仪表盘里的说法能对得上。
 
-## PryxIntel Premium（即将推出）
+## Free LLM API Premium（即将推出）
 
-PryxIntel Premium 正在积极开发中，将为团队与高并发场景带来更强大的云端编排功能：
+Free LLM API Premium 正在积极开发中，将为团队与高并发场景带来更强大的云端编排功能：
 - **实时零日目录同步**：提供方上线新模型或调整免费额度时毫秒级推送。
 - **全球多地域智能路由**：自动按延迟与地理分布进行跨云多活调度。
 - **企业级团队配额管理**：细粒度 Token 预算池与 Agent 级别限流保护。
 - **深度链路追踪与智能预测**：基于模型健康度自动规避拥塞节点。
 
-核心路由器与本地模型均衡调度功能将永远保持开源、完全免费。欢迎关注 [PryxIntel GitHub 仓库](https://github.com/PryxIntel/free-llm-api) 获取最新进展。
+核心路由器与本地模型均衡调度功能将永远保持开源、完全免费。欢迎关注 [samiZZZ67 GitHub 仓库](https://github.com/samiZZZ67/free-llm-api) 获取最新进展。
 
 ## 使用 API
 
@@ -314,4 +314,4 @@ print("Routed via:", resp.headers.get("x-routed-via"))
 
 ---
 
-<sub>本页中文翻译由社区贡献并由 PryxIntel 维护。</sub>
+<sub>本页中文翻译由社区贡献并由 samiZZZ67 维护。</sub>

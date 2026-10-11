@@ -5,13 +5,13 @@
 ### ⚡ **Aggregate 34+ Free-Tier AI Providers & 600+ Models into One Unified `/v1` Endpoint**
 *Zero-Cost, Ultra-Low Latency, Smart Dynamic Routing, Automated Fallback & AES-256 Encrypted*
 
-**Created & Maintained by [@PryxIntel](https://github.com/PryxIntel)**
+**Created & Maintained by [@samiZZZ67](https://github.com/samiZZZ67)**
 
 ---
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
-[![GitHub Repository](https://img.shields.io/badge/GitHub-PryxIntel%2Ffree--llm--api-181717?logo=github)](https://github.com/PryxIntel/free-llm-api)
-[![Stars](https://img.shields.io/github/stars/PryxIntel/free-llm-api?style=social)](https://github.com/PryxIntel/free-llm-api/stargazers)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-samiZZZ67%2Ffree--llm--api-181717?logo=github)](https://github.com/samiZZZ67/free-llm-api)
+[![Stars](https://img.shields.io/github/stars/samiZZZ67/free-llm-api?style=social)](https://github.com/samiZZZ67/free-llm-api/stargazers)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D20.18.0-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![Docker Ready](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)](Dockerfile)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript&logoColor=white)](tsconfig.json)
@@ -20,7 +20,7 @@
 <br/>
 
 <p align="center">
-  <img src="repo-assets/github-hero.png" width="900" alt="Free LLM API Gateway Dashboard by PryxIntel">
+  <img src="repo-assets/github-hero.png" width="900" alt="Free LLM API Gateway Dashboard by samiZZZ67">
 </p>
 
 </div>
@@ -61,7 +61,7 @@ Almost every modern AI research lab and model cloud provider provides **generous
 
 On their own, each provider imposes rate limits or quota walls that interrupt coding sessions.
 
-**Free LLM API by PryxIntel** collapses all of them into a single, bulletproof, OpenAI-compatible `/v1` endpoint. Your applications talk to **one endpoint**—and Free LLM API automatically balances requests, fails over around rate limits, and routes to whichever model is free, fast, and online.
+**Free LLM API by samiZZZ67** collapses all of them into a single, bulletproof, OpenAI-compatible `/v1` endpoint. Your applications talk to **one endpoint**—and Free LLM API automatically balances requests, fails over around rate limits, and routes to whichever model is free, fast, and online.
 
 ---
 
@@ -177,7 +177,7 @@ Run the containerized gateway with persistent local storage:
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/PryxIntel/free-llm-api.git
+git clone https://github.com/samiZZZ67/free-llm-api.git
 cd free-llm-api
 
 # 2. Copy sample environment
@@ -197,7 +197,7 @@ Open **`http://localhost:3001`** in your browser to access the control panel.
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/PryxIntel/free-llm-api.git
+git clone https://github.com/samiZZZ67/free-llm-api.git
 cd free-llm-api
 
 # 2. Install dependencies
@@ -345,15 +345,15 @@ The gateway translates this tool directly into Google Gemini's native search gro
 
 ## 📦 Pushing to GitHub
 
-To push this repository to your GitHub account (`PryxIntel`):
+To push this repository to your GitHub account (`samiZZZ67`):
 
 ```bash
 # 1. Update remote to the new SEO-optimized repository slug:
-git remote set-url origin https://github.com/PryxIntel/free-llm-api.git
+git remote set-url origin https://github.com/samiZZZ67/free-llm-api.git
 
 # 2. Stage and commit your changes:
 git add .
-git commit -m "feat: SEO-optimized repository launch for PryxIntel"
+git commit -m "feat: SEO-optimized repository launch for samiZZZ67"
 
 # 3. Push to your GitHub repository:
 git branch -M main
@@ -368,4 +368,4 @@ This project is licensed under the **MIT License**.
 
 Under the terms of the MIT License, you are free to use, copy, modify, merge, publish, distribute, sublicense, and sell copies of the software. The original copyright notice is retained in [`LICENSE`](./LICENSE).
 
-**Project Maintainer & Author:** [@PryxIntel](https://github.com/PryxIntel)
+**Project Maintainer & Author:** [@samiZZZ67](https://github.com/samiZZZ67)

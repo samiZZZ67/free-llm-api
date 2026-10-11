@@ -153,7 +153,7 @@ export default function PremiumPage() {
                 </div>
 
                 <a
-                  href="https://github.com/PryxIntel/free-llm-api"
+                  href="https://github.com/samiZZZ67/free-llm-api"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="shrink-0"
@@ -193,7 +193,7 @@ export default function PremiumPage() {
                   <span className="font-medium text-foreground">Open Source Guarantee:</span> Core local routing, unlimited multi-model load balancing, and offline support remain completely free forever.
                 </p>
                 <Badge variant="outline" className="text-[10px] font-mono shrink-0">
-                  PryxIntel v1.0.0
+                  FreeLLMAPI v1.0.0
                 </Badge>
               </div>
             </div>
