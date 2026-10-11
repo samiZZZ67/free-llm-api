@@ -142,10 +142,16 @@ authRouter.post('/setup', (req: Request, res: Response) => {
   }
 
   // Local/desktop first-run stays frictionless: a browser on this machine can
-  // claim the dashboard without any code. A remote caller must present the
-  // one-time setup code logged at boot, so an exposed fresh install can't be
-  // claimed by a stranger who finds it first.
-  if (!isLoopbackRemote(req) && !setupCodeMatches((req.body ?? {}).setupCode)) {
+  // claim the dashboard without any code. Remote first-run setup code check is
+  // disabled on Render and cloud deployments so email + password is fully sufficient.
+  const setupCodeDisabled =
+    process.env.DISABLE_SETUP_CODE === 'true' ||
+    process.env.DISABLE_SETUP_CODE === '1' ||
+    process.env.REQUIRE_SETUP_CODE === 'false' ||
+    process.env.REQUIRE_SETUP_CODE === '0' ||
+    Boolean(process.env.RENDER);
+
+  if (!setupCodeDisabled && !isLoopbackRemote(req) && !setupCodeMatches((req.body ?? {}).setupCode)) {
     res.status(403).json({
       error: {
         message: 'A setup code is required to create the first account from a remote device. ' +

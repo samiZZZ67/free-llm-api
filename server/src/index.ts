@@ -13,7 +13,7 @@ import { loadConfig } from './lib/config.js';
 import { applyDeclarativeConfigFromEnv } from './services/declarative-config.js';
 import { restoreDbBackupIfNeeded, startDbBackupPump } from './lib/db-backup.js';
 import { startBackupScheduler } from './services/backups.js';
-import { userCount } from './services/auth.js';
+import { userCount, createUser } from './services/auth.js';
 import { generateSetupCode } from './lib/setup-code.js';
 import { warnOnEnvDrift } from './lib/env-drift.js';
 import { warnOnRoutingOverrideDrift } from './services/model-weight-overrides.js';
@@ -62,10 +62,35 @@ async function main() {
     console.log(`[ratelimit] cleared ${expiredCooldowns} expired cooldown${expiredCooldowns === 1 ? '' : 's'}`);
   }
 
-  // First-run hardening: when the dashboard is still unclaimed, mint a one-time
-  // setup code and log it. A loopback browser can finish setup without it; a
-  // remote caller must supply it (see routes/auth.ts). Regenerated each boot.
-  if (userCount() === 0) {
+  // Auto-seed admin user from environment variables if provided
+  const adminPass = process.env.ADMIN_PASSWORD || process.env.DASHBOARD_PASSWORD || process.env.FREEAPI_ADMIN_PASSWORD;
+  const adminEmail = process.env.ADMIN_EMAIL || process.env.DASHBOARD_EMAIL || process.env.FREEAPI_ADMIN_EMAIL || 'admin@freellmapi.local';
+  if (adminPass && userCount() === 0) {
+    try {
+      createUser(adminEmail, adminPass);
+      console.log(`[auth] Auto-seeded initial admin account (${adminEmail}) from environment variables.`);
+    } catch (err) {
+      console.error('[auth] Failed to auto-seed admin account:', err);
+    }
+  }
+
+  // Keep unified API key in sync with UNIFIED_API_KEY env if provided
+  const envUnifiedKey = process.env.UNIFIED_API_KEY || process.env.FREEAPI_UNIFIED_KEY;
+  if (envUnifiedKey) {
+    try {
+      getDb().prepare("UPDATE settings SET value = ? WHERE key = 'unified_api_key'").run(envUnifiedKey.trim());
+    } catch {}
+  }
+
+  // First-run hardening: when the dashboard is still unclaimed and setup code is not disabled, mint a one-time code
+  const setupCodeDisabled =
+    process.env.DISABLE_SETUP_CODE === 'true' ||
+    process.env.DISABLE_SETUP_CODE === '1' ||
+    process.env.REQUIRE_SETUP_CODE === 'false' ||
+    process.env.REQUIRE_SETUP_CODE === '0' ||
+    Boolean(process.env.RENDER);
+
+  if (userCount() === 0 && !setupCodeDisabled) {
     generateSetupCode();
   }
 
