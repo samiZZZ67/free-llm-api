@@ -153,7 +153,7 @@ export default function PremiumPage() {
                 </div>
 
                 <a
-                  href="https://github.com/samiZZZ67/free-llm-api"
+                  href="https://github.com/samiZZZ67"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="shrink-0"
